@@ -7,32 +7,26 @@ package com.argus.hibernateauctions.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
  * @author mohanlal
  */
-@Embeddable
-public class BankAccount {
+@Entity
+@PrimaryKeyJoinColumn(name = "billid")
+public class BankAccount extends BillingDetails{
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false, nullable = false)
-    @Id
-    private long bankid;
+    
     private String number;
     private String bankname;
     private String swift;
 
-    public long getBankid() {
-        return bankid;
-    }
-
-    public void setBankid(long bankid) {
-        this.bankid = bankid;
-    }
+    
 
     public String getNumber() {
         return number;

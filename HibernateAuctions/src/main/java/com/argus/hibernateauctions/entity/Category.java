@@ -6,13 +6,18 @@
 package com.argus.hibernateauctions.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -21,12 +26,63 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Category {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     @Id
     private long categoryid;
-    @OneToMany
+    private String name;
+    @OneToMany(mappedBy = "category", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Item> items = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    private Set<Category> children = new HashSet<Category>();
+    /**
+     * @return the parent
+     */
+    public Category getParent() {
+        return parent;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent(Category parent) {
+        this.parent = parent;
+    }
+
+    /**
+     * @return the children
+     */
+    public Set<Category> getChildren() {
+        return children;
+    }
+
+    /**
+     * @param children the children to set
+     */
+    public void setChildren(Set<Category> children) {
+        this.children = children;
+    }
+
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public long getCategoryid() {
         return categoryid;
@@ -43,5 +99,5 @@ public class Category {
     public void setItems(List<Item> items) {
         this.items = items;
     }
-    
+
 }

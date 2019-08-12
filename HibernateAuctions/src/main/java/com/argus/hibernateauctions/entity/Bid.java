@@ -24,6 +24,7 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Bid {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     @Id
@@ -32,10 +33,10 @@ public class Bid {
     private Date bidcreated;
     @ManyToOne
     private Item item;
-    @OneToOne
+    @OneToOne  //
     private Item successitem;
     @ManyToOne
-    private User user;
+    private Useruser user;
 
     public long getBidid() {
         return bidid;
@@ -77,11 +78,11 @@ public class Bid {
         this.successitem = successitem;
     }
 
-    public User getUser() {
+    public Useruser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Useruser user) {
         this.user = user;
     }
     

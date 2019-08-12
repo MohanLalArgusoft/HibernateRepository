@@ -6,14 +6,12 @@
 package com.argus.hibernateauctions.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -22,6 +20,7 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Shipment {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     @Id
@@ -31,8 +30,10 @@ public class Shipment {
     private Date shipmentcreated;
     @OneToOne
     private Item item;
-    @OneToOne
-    private User user;
+    @OneToOne   //
+    private Useruser user;
+    @OneToOne(mappedBy = "shipment",orphanRemoval = true, cascade = CascadeType.ALL)   
+    private Address address;
 
     public long getShipmentid() {
         return shipmentid;
@@ -74,13 +75,26 @@ public class Shipment {
         this.item = items;
     }
 
-    public User getUser() {
+    public Useruser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Useruser user) {
         this.user = user;
     }
     
+    /**
+     * @return the address
+     */
+    public Address getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(Address address) {
+        this.address = address;
+    }
     
 }

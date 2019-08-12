@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Address {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     @Id
@@ -25,12 +26,12 @@ public class Address {
     private String street;
     private String zipcode;
     private String city;
-    @OneToOne
-    private User user;
-    @OneToOne
+    @OneToOne   //
+    private Useruser user;
+    @OneToOne   //
     private Shipment shipment;
-    @OneToOne
-    private Address address;
+    @OneToOne   //
+    private BillingDetails billingDetails;
 
     public long getAddressid() {
         return addressid;
@@ -64,11 +65,11 @@ public class Address {
         this.city = city;
     }
 
-    public User getUser() {
+    public Useruser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Useruser user) {
         this.user = user;
     }
 
@@ -80,11 +81,18 @@ public class Address {
         this.shipment = shipment;
     }
 
-    public Address getAddress() {
-        return address;
+    /**
+     * @return the billingDetails
+     */
+    public BillingDetails getBillingDetails() {
+        return billingDetails;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    /**
+     * @param billingDetails the billingDetails to set
+     */
+    public void setBillingDetails(BillingDetails billingDetails) {
+        this.billingDetails = billingDetails;
     }
+    
 }

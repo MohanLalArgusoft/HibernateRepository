@@ -9,12 +9,12 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,12 +25,14 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Item {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     @Id
     private long itemid;
     private String name;
     private String description;
+       
     private BigDecimal initialPrice;
     private BigDecimal reservePrice;
     private Date startDate;
@@ -39,15 +41,15 @@ public class Item {
     private Date approvalDatetime;
     @ManyToOne
     private Category category;
-    @OneToOne
-    private User user; 
-    @OneToMany
+    @ManyToOne
+    private Useruser user; 
+    @OneToMany(mappedBy = "item",orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Bid> bids = new ArrayList<>();
-    @OneToOne
+    @OneToOne(mappedBy = "item",orphanRemoval = true, cascade = CascadeType.ALL)
     private Bid successbid ;
-    @OneToMany
+    @OneToMany(mappedBy = "item",orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
-    @OneToOne
+    @OneToOne(mappedBy = "item",orphanRemoval = true, cascade = CascadeType.ALL)
     private Shipment shipment;
 
     public long getItemid() {
@@ -130,11 +132,11 @@ public class Item {
         this.category = category;
     }
 
-    public User getUser() {
+    public Useruser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Useruser user) {
         this.user = user;
     }
 

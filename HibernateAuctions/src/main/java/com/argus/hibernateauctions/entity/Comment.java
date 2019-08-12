@@ -29,7 +29,7 @@ public class Comment {
     @ManyToOne
     private Item item;
     @ManyToOne
-    private User user;
+    private Useruser user;
 
     public long getCommentid() {
         return commentid;
@@ -71,11 +71,11 @@ public class Comment {
         this.item = item;
     }
 
-    public User getUser() {
+    public Useruser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Useruser user) {
         this.user = user;
     }
     

@@ -7,32 +7,25 @@ package com.argus.hibernateauctions.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
  * @author mohanlal
  */
-@Embeddable
-public class CreditCard {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false, nullable = false)
-    @Id
-    private long creditid;
+@Entity
+@PrimaryKeyJoinColumn(name = "billid")
+public class CreditCard extends BillingDetails{
     private String type;
     private String number;
     private String expmonth;
     private String expyear;
 
-    public long getCreditid() {
-        return creditid;
-    }
-
-    public void setCreditid(long creditid) {
-        this.creditid = creditid;
-    }
+    
 
     public String getType() {
         return type;
